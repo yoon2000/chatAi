@@ -22,7 +22,7 @@ public class ChatRoomService {
         return chatRoom;
     }
 
-    public List<ChatRoom> getList() {
+    public List<ChatRoom> getAll() {
         return chatRoomRepository.findAll();
     }
 }
