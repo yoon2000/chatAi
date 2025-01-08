@@ -22,4 +22,8 @@ public class MemberService {
         return RsData.of("200", "%s님 가입을 환영합니다.".formatted(username), member);
 
     }
+
+    public Member getMember(Long memberId) {
+        return memberRepository.findById(memberId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
+    }
 }
