@@ -7,9 +7,6 @@ import jakarta.persistence.ManyToOne;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Setter
 @Getter
@@ -23,16 +20,4 @@ public class Article extends BaseEntity {
     private String content;
     @ManyToOne
     private Member author;
-
-    //add comment
-    public static class Comment {
-        private Member author;
-        private String content;
-    }
-
-    private List<Comment> comments = new ArrayList<>();
-
-    public void addComment(Comment comment) {
-        this.comments.add(comment);
-    }
 }
