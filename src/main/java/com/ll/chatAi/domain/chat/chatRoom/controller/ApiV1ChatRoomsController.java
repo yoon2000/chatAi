@@ -12,8 +12,9 @@ import java.util.List;
 @RequestMapping("api/v1/chat/rooms")
 @RequiredArgsConstructor
 @CrossOrigin(
-        origins = "https://cdpn.io"
+        origins = {"https://cdpn.io", "https://chat-app-front2501.vercel.app", "http://127.0.0.1:5173"}
 )
+
 public class ApiV1ChatRoomsController {
     private final ChatRoomService chatRoomService;
 
@@ -24,15 +25,10 @@ public class ApiV1ChatRoomsController {
     }
 
     @GetMapping("{roomId}")
-    public String showRoom(@PathVariable Long roomId){
-        return roomId + "번 채팅방 조회완료";
+    public ChatRoom getChatRoom(@PathVariable Long roomId){
+        ChatRoom chatRoom = chatRoomService.getChatRoom(roomId);
+        return chatRoom;
     }
-
-//    @PostMapping()
-//    public ChatRoom createRoom(@RequestBody Map<String, Object> request){
-//        ChatRoom chatRoom = chatRoomService.make(request.get("name").toString());
-//        return chatRoom;
-//    }
 
     @PostMapping()
     public ChatRoom createRoom(@RequestBody RequestCreateRoom requestCreateRoom){
