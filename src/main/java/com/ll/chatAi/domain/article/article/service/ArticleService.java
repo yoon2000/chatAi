@@ -2,6 +2,8 @@ package com.ll.chatAi.domain.article.article.service;
 
 import com.ll.chatAi.domain.article.article.entity.Article;
 import com.ll.chatAi.domain.article.article.repository.ArticleRepository;
+import com.ll.chatAi.domain.article.articleComment.entity.ArticleComment;
+import com.ll.chatAi.domain.article.articleComment.repository.ArticleCommentRepository;
 import com.ll.chatAi.domain.member.member.service.MemberService;
 import com.ll.chatAi.global.rsData.RsData;
 import jakarta.transaction.Transactional;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class ArticleService {
     private final ArticleRepository articleRepository;
     private final MemberService memberService;
+    private final ArticleCommentRepository articleCommentRepository;
 
     @Transactional
     public RsData<Article> write(long memberId, String title, String content) {
@@ -38,5 +41,9 @@ public class ArticleService {
         article.setContent(content);
 
         return articleRepository.save(article);
+    }
+
+    public void modifyComment(ArticleComment comment, String body) {
+        comment.setBody(body);
     }
 }
