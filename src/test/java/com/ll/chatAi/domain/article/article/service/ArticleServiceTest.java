@@ -1,5 +1,7 @@
 package com.ll.chatAi.domain.article.article.service;
 
+import com.ll.chatAi.domain.article.article.entity.Article;
+import com.ll.chatAi.global.rsData.RsData;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
