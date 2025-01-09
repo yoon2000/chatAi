@@ -27,10 +27,10 @@ public class Article extends BaseEntity {
 
     private String title;
     private String content;
-    @ManyToOne
+    @ManyToOne(fetch =  FetchType.LAZY)
     private Member author;
 
-    @OneToMany(fetch =  FetchType.LAZY, mappedBy = "article", cascade = ALL) //Lazy 모드로 가볍게 천천히 불러옴!
+    @OneToMany(mappedBy = "article", cascade = ALL, orphanRemoval = true) //Lazy 모드로 가볍게 천천히 불러옴!
     @Builder.Default // 왜 넣음? -> 기본값을 넣어주기 위해서
     @ToString.Exclude
     private List<ArticleComment> comments = new ArrayList<>();
@@ -49,8 +49,29 @@ public class Article extends BaseEntity {
         comments.remove(comment);
     }
 
-    @OneToMany(mappedBy = "article", cascade = ALL)
+    @OneToMany(mappedBy = "article", cascade = ALL, orphanRemoval = true)
     @Builder.Default // 왜 넣음? -> 기본값을 넣어주기 위해서
     @ToString.Exclude
     private List<ArticleTag> tags = new ArrayList<>();
+
+    public void addTag(String content) {
+        ArticleTag articleTag = ArticleTag.builder()
+                .article(this)
+                .content(content)
+                .build();
+        tags.add(articleTag);
+    }
+
+    public void addTags(String... contents) {
+        for (String content : contents) {
+            addTag(content);
+        }
+    }
+
+    public String getTagsStr() {
+        return tags.stream()
+                .map(tag -> "#" + tag.getContent())
+                .reduce((a, b) -> a + " " + b)
+                .orElse("");
+    }
 }

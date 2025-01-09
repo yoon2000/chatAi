@@ -3,6 +3,7 @@ package com.ll.chatAi.domain.article.articleTag.entity;
 import com.ll.chatAi.domain.article.article.entity.Article;
 import com.ll.chatAi.global.baseEntity.BaseEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class ArticleTag extends BaseEntity {
     public ArticleTag(){
 
     }
-    @ManyToOne
+    private String content;
+    @ManyToOne(fetch =  FetchType.LAZY)
     private Article article;
 }
