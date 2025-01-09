@@ -2,6 +2,9 @@ package com.ll.chatAi.domain.article.article.service;
 
 import com.ll.chatAi.domain.article.article.entity.Article;
 import com.ll.chatAi.domain.article.articleComment.entity.ArticleComment;
+import com.ll.chatAi.domain.article.articleComment.service.ArticleCommentService;
+import com.ll.chatAi.domain.article.articleTag.entity.ArticleTag;
+import com.ll.chatAi.domain.article.articleTag.service.ArticleTagService;
 import com.ll.chatAi.domain.member.member.entity.Member;
 import com.ll.chatAi.domain.member.member.service.MemberService;
 import com.ll.chatAi.global.Ut;
@@ -27,6 +30,12 @@ public class ArticleServiceTest {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private ArticleCommentService articleCommentService;
+
+    @Autowired
+    private ArticleTagService articleTagService;
 
     @DisplayName("글 쓰기")
     @Test
@@ -117,36 +126,37 @@ public class ArticleServiceTest {
 
         assertThat(tagsStr).isEqualTo("#자바 #백엔드");
     }
-//
-//    @DisplayName("1번 게시물 toString")
-//    @Test
-//    void t10() {
-//        Article article1 = articleService.getArticle(1L);
-//
-//        System.out.println(article1);
-//    }
-//
-//    @DisplayName("1번 회원이 작성한 댓글들")
-//    @Test
-//    void t11() {
-//        List<ArticleComment> articleComments = articleCommentService.findByAuthorId(1L);
-//
-//        assertThat(articleComments.size()).isGreaterThan(0);
-//    }
-//
-//    @DisplayName("1번 회원이 작성한 태그들")
-//    @Test
-//    void t12() {
-//        List<ArticleTag> articleTags = articleTagService.findByAuthorId(1L);
-//
-//        assertThat(articleTags.size()).isGreaterThan(0);
-//    }
-//
-//    @DisplayName("아이디가 user1 인 회원이 작성한 태그들")
-//    @Test
-//    void t13() {
-//        List<ArticleTag> articleTags = articleTagService.findByAuthorUsername("user1");
-//
-//        assertThat(articleTags.size()).isGreaterThan(0);
-//    }
+
+    @DisplayName("1번 게시물 toString")
+    @Test
+    void t10() {
+        Article article1 = articleService.getArticle(1L);
+
+        System.out.println(article1);
+    }
+
+    @DisplayName("1번 회원이 작성한 댓글들")
+    @Test
+    void t11() {
+        List<ArticleComment> articleComments = articleCommentService.findByAuthorId(1L);
+
+        assertThat(articleComments.size()).isGreaterThan(0);
+    }
+
+    @DisplayName("1번 회원이 작성한 태그들")
+    @Test
+    void t12() {
+        List<ArticleTag> articleTags = articleTagService.findByAuthorId(1L);
+        System.out.println();
+
+        assertThat(articleTags.size()).isGreaterThan(0);
+    }
+
+    @DisplayName("아이디가 user1 인 회원이 작성한 태그들")
+    @Test
+    void t13() {
+        List<ArticleTag> articleTags = articleTagService.findByAuthorUsername("user1");
+
+        assertThat(articleTags.size()).isGreaterThan(0);
+    }
 }
