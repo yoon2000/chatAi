@@ -37,6 +37,8 @@ public class ApiV1ChatMessageController {
         try {
             ChatRoom chatRoom = chatRoomService.getChatRoom(roomId);
             chatMessageService.write(chatRoom, chatMessageRequest.getAuthor(), chatMessageRequest.getContent());
+            // 메시지가 작성되면 해당 채팅방에 메시지 발송
+            simpMessagingTemplate.convertAndSend("/topic/chat/" + roomId, chatMessageRequest);
             return ResponseEntity.ok("메시지 작성 완료");
 
         } catch (Exception e) {
