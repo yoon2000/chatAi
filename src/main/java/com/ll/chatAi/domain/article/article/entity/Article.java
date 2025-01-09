@@ -5,6 +5,7 @@ import com.ll.chatAi.domain.article.articleTag.entity.ArticleTag;
 import com.ll.chatAi.domain.member.member.entity.Member;
 import com.ll.chatAi.global.baseEntity.BaseEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.*;
@@ -29,7 +30,7 @@ public class Article extends BaseEntity {
     @ManyToOne
     private Member author;
 
-    @OneToMany(mappedBy = "article", cascade = ALL)
+    @OneToMany(fetch =  FetchType.LAZY, mappedBy = "article", cascade = ALL) //Lazy 모드로 가볍게 천천히 불러옴!
     @Builder.Default // 왜 넣음? -> 기본값을 넣어주기 위해서
     @ToString.Exclude
     private List<ArticleComment> comments = new ArrayList<>();

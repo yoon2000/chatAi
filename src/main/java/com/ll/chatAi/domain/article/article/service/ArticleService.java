@@ -6,9 +6,11 @@ import com.ll.chatAi.domain.article.articleComment.entity.ArticleComment;
 import com.ll.chatAi.domain.article.articleComment.repository.ArticleCommentRepository;
 import com.ll.chatAi.domain.member.member.service.MemberService;
 import com.ll.chatAi.global.rsData.RsData;
-import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -46,5 +48,9 @@ public class ArticleService {
     @Transactional
     public void modifyComment(ArticleComment comment, String body) {
         comment.setBody(body);
+    }
+
+    public List<Article> findAll() {
+        return articleRepository.findAll();
     }
 }
