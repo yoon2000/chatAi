@@ -17,7 +17,7 @@ import org.springframework.test.context.ActiveProfiles;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
-@ActiveProfiles({"test", "dev"})
+@ActiveProfiles("test")
 @Transactional
 public class ArticleServiceTest {
     @Autowired

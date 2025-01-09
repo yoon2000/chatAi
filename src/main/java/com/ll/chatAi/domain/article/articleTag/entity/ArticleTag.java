@@ -8,8 +8,8 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Setter
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+//@AllArgsConstructor
+//@NoArgsConstructor
 @SuperBuilder
 @ToString(callSuper = true)
 public class ArticleTag extends BaseEntity {
