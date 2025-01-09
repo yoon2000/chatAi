@@ -43,6 +43,7 @@ public class ArticleService {
 //        return articleRepository.save(article); // 이걸 안해도 영속성 컨테스트가 저장해줌 BUT Transactional 붙여야함.
     }
 
+    @Transactional
     public void modifyComment(ArticleComment comment, String body) {
         comment.setBody(body);
     }
