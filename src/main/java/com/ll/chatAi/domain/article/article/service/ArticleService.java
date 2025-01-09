@@ -7,6 +7,8 @@ import com.ll.chatAi.domain.article.articleComment.repository.ArticleCommentRepo
 import com.ll.chatAi.domain.member.member.service.MemberService;
 import com.ll.chatAi.global.rsData.RsData;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,5 +54,9 @@ public class ArticleService {
 
     public List<Article> findAll() {
         return articleRepository.findAll();
+    }
+
+    public Page<Article> search(Pageable pageable) {
+        return articleRepository.findAll(pageable);
     }
 }
