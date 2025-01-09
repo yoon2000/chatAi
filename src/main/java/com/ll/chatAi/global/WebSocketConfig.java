@@ -10,7 +10,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws/chat/{roomId}")
+        registry.addEndpoint("/ws/chat/")
                 .setAllowedOrigins("*")  // 모든 도메인에서의 요청을 허용
                 .withSockJS();
     }
