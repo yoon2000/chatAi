@@ -1,5 +1,6 @@
 package com.ll.chatAi.domain.article.article.controller;
 
+import com.ll.chatAi.domain.article.article.dto.ArticleDto;
 import com.ll.chatAi.domain.article.article.entity.Article;
 import com.ll.chatAi.domain.article.article.service.ArticleService;
 import lombok.RequiredArgsConstructor;
@@ -14,13 +15,19 @@ public class ApiV1ArticleController {
     private final ArticleService articleService;
 
     @GetMapping
-    public List<Article> getArticles() {
-        return articleService.findAll();
+    public List<ArticleDto> getArticles() {
+        List<Article> articles = articleService.findAll();
+        List<ArticleDto> articleDtoList = articles.stream()
+                .map(ArticleDto::new)
+                .toList();
+
+        return articleDtoList;
     }
 
     @GetMapping("{id}")
-    public Article getArticle(@PathVariable("id") Long id) {
-        return articleService.getArticle(id);
+    public ArticleDto getArticle(@PathVariable("id") Long id) {
+        Article article = articleService.getArticle(id);
+        return new ArticleDto(article);
     }
 
     @PostMapping
