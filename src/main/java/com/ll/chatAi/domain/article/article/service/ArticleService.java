@@ -4,8 +4,8 @@ import com.ll.chatAi.domain.article.article.entity.Article;
 import com.ll.chatAi.domain.article.article.repository.ArticleRepository;
 import com.ll.chatAi.domain.article.articleComment.entity.ArticleComment;
 import com.ll.chatAi.domain.article.articleComment.repository.ArticleCommentRepository;
+import com.ll.chatAi.domain.member.member.entity.Member;
 import com.ll.chatAi.domain.member.member.service.MemberService;
-import com.ll.chatAi.global.rsData.RsData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,16 +21,15 @@ public class ArticleService {
     private final ArticleCommentRepository articleCommentRepository;
 
     @Transactional
-    public RsData<Article> write(long memberId, String title, String content) {
+    public Article write(String title, String content) {
         Article article = Article.builder()
-                .author(memberService.getMember(memberId))
+                .author(Member.builder().id(1L).build())
                 .title(title)
                 .content(content)
                 .build();
 
-        articleRepository.save(article);
 
-        return RsData.of("200", "%d번 게시글이 완료되었습니다".formatted(article.getAuthor().getId()), article);
+        return articleRepository.save(article);
     }
 
     public Article getArticle(long articleId) {
@@ -38,11 +37,11 @@ public class ArticleService {
     }
 
     @Transactional
-    public void modify(Article article, String title, String content){
+    public Article modify(Article article, String title, String content){
         article.setTitle(title);
         article.setContent(content);
 
-//        return articleRepository.save(article); // 이걸 안해도 영속성 컨테스트가 저장해줌 BUT Transactional 붙여야함.
+        return article; // 이걸 안해도 영속성 컨테스트가 저장해줌 BUT Transactional 붙여야함.
     }
 
     @Transactional
@@ -54,6 +53,7 @@ public class ArticleService {
         return articleRepository.findAll();
     }
 
+    @Transactional
     public void delete(Long id) {
         articleRepository.deleteById(id);
     }
