@@ -7,7 +7,7 @@ import com.ll.chatAi.domain.article.articleTag.entity.ArticleTag;
 import com.ll.chatAi.domain.article.articleTag.service.ArticleTagService;
 import com.ll.chatAi.domain.member.member.entity.Member;
 import com.ll.chatAi.domain.member.member.service.MemberService;
-import com.ll.chatAi.global.Ut;
+import com.ll.chatAi.global.util.Ut;
 import com.ll.chatAi.global.rsData.RsData;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
