@@ -41,9 +41,9 @@ public class NotProd {
                     chatMessageService.write(chatRoom1, "홍길동", "공부 메시지" + num);
                 });
 
-                Member member1 = memberService.join("user1", "1234").getData();
-                Member member2 = memberService.join("user2", "1234").getData();
-                Member member3 = memberService.join("user3", "1234").getData();
+                Member member1 = memberService.join("user1", "1234");
+                Member member2 = memberService.join("user2", "1234");
+                Member member3 = memberService.join("user3", "1234");
 
                 Article article1 = articleService.write("제목1", "내용1");
                 Article article2 = articleService.write("제목2", "내용2");
