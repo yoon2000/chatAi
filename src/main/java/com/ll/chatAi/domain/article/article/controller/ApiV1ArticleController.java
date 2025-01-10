@@ -37,7 +37,7 @@ public class ApiV1ArticleController {
     @PostMapping
     public RsData<ArticleDto> writeArticle(@Valid @RequestBody ArticleWriteRequest articleWriteRequest) {
         Article article = articleService.write(articleWriteRequest.getTitle(), articleWriteRequest.getContent());
-        return new RsData(
+        return new RsData<>(
                 "200",
                 "게시글 작성 완료",
                 new ArticleDto(article)
@@ -59,7 +59,6 @@ public class ApiV1ArticleController {
     public RsData<Void> deleteArticle(@PathVariable("id") Long id) {
         System.out.println(id);
         articleService.delete(id);
-
 
         return new RsData(
                 "200",
